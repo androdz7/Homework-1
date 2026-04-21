@@ -32,8 +32,12 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                .requestMatchers("/api/users/**") //Whitelist
-                                .permitAll()
+                                .requestMatchers("/api/users/**").permitAll()
+                                .requestMatchers("/api/regions/**").permitAll()
+                                .requestMatchers("/api/countries/**").permitAll()
+                                .requestMatchers("/api/locations/**").permitAll()
+                                .requestMatchers("/api/departments/**").permitAll()
+                                .requestMatchers("/api/employees/**").permitAll()
                                 //.requestMatchers(HttpMethod.GET, "/api/customer/**").hasAnyAuthority(CUSTOMER_READ.getKeyword())
                                 .anyRequest()
                                 .authenticated()

@@ -1,13 +1,11 @@
 package ge.ibsu.demo.controllers;
 
+import ge.ibsu.demo.dto.DepartmentInfoDTO;
 import ge.ibsu.demo.entities.Department;
 import ge.ibsu.demo.entities.Employee;
 import ge.ibsu.demo.services.DepartmentService;
 import ge.ibsu.demo.services.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +22,12 @@ public class DepartmentController {
         this.employeeService = employeeService;
     }
 
+    @GetMapping("/search")
+    public List<DepartmentInfoDTO> search(@RequestParam(required = false) String country,
+                                          @RequestParam(required = false) String city) {
+        return departmentService.search(country, city);
+    }
+
     @GetMapping("/all")
     public List<Department> getAll() {
         return departmentService.getAll();
@@ -37,5 +41,10 @@ public class DepartmentController {
     @GetMapping("/{id}/employees")
     public List<Employee> getEmployees(@PathVariable Long id) {
         return employeeService.getByDepartment(id);
+    }
+
+    @PostMapping("/add")
+    public Department add(@RequestBody Department department) {
+        return departmentService.save(department);
     }
 }
