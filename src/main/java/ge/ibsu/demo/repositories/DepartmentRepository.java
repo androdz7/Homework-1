@@ -22,4 +22,7 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
             "AND (:cityName IS NULL OR l.city LIKE %:cityName%)")
     List<DepartmentInfoDTO> searchDepartments(@Param("countryName") String countryName,
                                               @Param("cityName") String cityName);
+
+    @Query("SELECT d FROM Department d JOIN FETCH d.employees")
+    List<Department> findAllWithEmployees();
 }

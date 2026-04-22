@@ -1,5 +1,6 @@
 package ge.ibsu.demo.repositories;
 
+import ge.ibsu.demo.dto.EmployeeSummary;
 import ge.ibsu.demo.entities.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,4 +38,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     <T> T findByPhoneOrEmail(String phone, String email, Class<T> type);
 
+    List<EmployeeSummary> findAllProjectedBy();
 }
